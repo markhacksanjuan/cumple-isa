@@ -21,29 +21,33 @@ import Pruebas from './Pruebas/Pruebas'
 const ScapeRoom = () => {
     const { user, audio } = useContext(UserStateContext)
     const dispatch = useContext(UserDispatchContext)
-    const [show1, setShow1] = useState(user ? user.prueba1.show : false)
-    const [show2, setShow2] = useState(user ? user.prueba2.show : false)
-    const [show3, setShow3] = useState(user ? user.prueba3.show : false)
-    const [show4, setShow4] = useState(user ? user.prueba4.show : false)
-    const [show5, setShow5] = useState(user ? user.prueba5.show : false)
-    const [show6, setShow6] = useState(user ? user.prueba6.show : false)
-    const [userFetched, setUserFetched] = useState()
+    const [show1, setShow1] = useState(false)
+    const [show2, setShow2] = useState(false)
+    const [show3, setShow3] = useState(false)
+    const [show4, setShow4] = useState(false)
+    const [show5, setShow5] = useState(false)
+    const [show6, setShow6] = useState(false)
 
     const fetchUser = async () => {
         const response = await userService.fetchUser(user._id)
         dispatch({
             type: 'FETCH_USER',
-            userFetched: response.user,
-            user: response.user
+            userFetched: response.user
         })
-        setUserFetched(response.user)
     }
 
     useEffect(() => {
+        console.log(user)
         if(user){
             fetchUser()
+            setShow1(user.prueba1.show)
+            setShow2(user.prueba2.show)
+            setShow3(user.prueba3.show)
+            setShow4(user.prueba4.show)
+            setShow5(user.prueba5.show)
+            setShow6(user.prueba6.show)
         }
-    }, [user, audio])
+    }, [audio, user])
 
     const renderBegin = () => {
         return (
@@ -64,7 +68,7 @@ const ScapeRoom = () => {
     }
     const renderGame = () => {
         const onClick = () => {
-            // setShow1(true)
+            fetchUser()
             dispatch({
                 type: 'AUDIO',
                 audio: false
@@ -95,12 +99,12 @@ const ScapeRoom = () => {
                 <Resultados/>
                 <Grid container direction='column' justifyContent='center' alignItems='center'>
                     {user ? renderGame() : renderBegin()}
-                    {(show1 && !audio) && <Pruebas prueba={1} respuesta='daleisa' resultado='1234' setShow={setShow2} setOff={setShow1}/>}
-                    {(show2 && !audio) && <Pruebas prueba={2} respuesta='izquierda' resultado='5678' setShow={setShow3} setOff={setShow2} />}
-                    {(show3 && !audio) && <Pruebas prueba={3} respuesta='salchipapa' resultado='39.26778, -2.61427' setShow={setShow4} setOff={setShow3} />}
-                    {(show4 && !audio) && <Pruebas prueba={4} respuesta='culo' resultado='2468' setShow={setShow5} setOff={setShow4} />}
-                    {(show5 && !audio) && <Pruebas prueba={5} respuesta='culo' resultado='rugby, Coslada, negra, Holanda' setShow={setShow6} setOff={setShow5} />}
-                    {(show6 && !audio) && <Pruebas prueba={6} respuesta='culo' resultado='39.15468, -2.69563'/>}
+                    {(show1 && !audio) && <Pruebas prueba={1} respuesta='daleisa' resultado='1234' setShow={setShow2} setOff={setShow1} show={user?.prueba1.show}/>}
+                    {(show2 && !audio) && <Pruebas prueba={2} respuesta='izquierda' resultado='5678' setShow={setShow3} setOff={setShow2} show={user?.prueba2.show} />}
+                    {(show3 && !audio) && <Pruebas prueba={3} respuesta='salchipapa' resultado='39.26778, -2.61427' setShow={setShow4} setOff={setShow3} show={user?.prueba3.show} />}
+                    {(show4 && !audio) && <Pruebas prueba={4} respuesta='culo' resultado='2468' setShow={setShow5} setOff={setShow4} show={user?.prueba4.show} />}
+                    {(show5 && !audio) && <Pruebas prueba={5} respuesta='culo' resultado='rugby, Coslada, negra, Holanda' setShow={setShow6} setOff={setShow5} show={user?.prueba5.show} />}
+                    {(show6 && !audio) && <Pruebas prueba={6} respuesta='culo' resultado='39.15468, -2.69563' show={user?.prueba6.show}/>}
                 </Grid>
             </Layout>
         </>

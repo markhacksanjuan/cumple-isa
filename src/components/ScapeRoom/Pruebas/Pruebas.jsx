@@ -10,10 +10,13 @@ import {
 } from '@mui/material'
 
 import { pruebasService } from '../../../services/pruebas'
-import { UserStateContext } from '../../GlobalContextProvider/GlobalContextProvider'
+import { userService } from '../../../services/user'
+import { UserStateContext, UserDispatchContext } from '../../GlobalContextProvider/GlobalContextProvider'
 
-const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff }) => {
+const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff, show }) => {
     const { user } = useContext(UserStateContext)
+    const dispatch = useContext(UserDispatchContext)
+    console.log(prueba, show)
     const { control, handleSubmit, setValue } = useForm({
         defaultValues: {
             [`prueba${prueba}`]: ''
@@ -45,11 +48,16 @@ const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff }) => {
             </>
         )
     }
-    const onClick = () => {
+    const onClick = async () => {
         setShow(true)
         if(setOff){
             setOff(false)
         }
+        const response = await userService.fetchUser(user._id)
+        dispatch({
+            type: 'LOGIN',
+            user: response.user
+        })
     }
     const renderButtonShow = () => {
         return (
@@ -106,7 +114,7 @@ const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff }) => {
                 <Grid container direction='column' justifyContent='center' alignItems='center'>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Grid item>
-                            {renderInput()}
+                            {user[`prueba${prueba}`].show && renderInput()}
                         </Grid>
                         <Grid item>
                             {error && renderError()}
@@ -119,16 +127,24 @@ const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff }) => {
             </>
         )
     }
-    return (
-        <>
-            <Container>
-                <Typography variant='h6' align='center'>
-                    Prueba {prueba}
-                </Typography>
-                {respuestaCorrecta ? renderRespuestaCorrecta() : renderForm()}
-            </Container>
-        </>
-    )
+    if(show){
+        return (
+            <>
+                <Container>
+                    <Typography variant='h6' align='center'>
+                        Prueba {prueba}
+                    </Typography>
+                    {respuestaCorrecta ? renderRespuestaCorrecta() : renderForm()}
+                </Container>
+            </>
+        )
+    }else {
+        return (
+            <>
+
+            </>
+        )
+    }
     
 }
 export default Pruebas
