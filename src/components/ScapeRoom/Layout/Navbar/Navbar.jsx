@@ -23,6 +23,11 @@ const Navbar = () => {
             audio: true
         })
     }
+    const onClickPistas = () => {
+        dispatch({
+            type: 'RESULTADOS_OPEN'
+        })
+    }
 
     return (
         <>
@@ -39,8 +44,8 @@ const Navbar = () => {
                                 <Button color='inherit' onClick={() => onClickAudio()}>
                                     audio
                                 </Button>
-                                <Button color='inherit'>
-                                    pistas
+                                <Button color='inherit' onClick={() => onClickPistas()}>
+                                    resultados
                                 </Button>
                             </Grid>
                         </Grid>

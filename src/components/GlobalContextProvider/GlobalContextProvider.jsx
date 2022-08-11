@@ -7,7 +7,7 @@ const user = JSON.parse(localStorage.getItem('user'))
 const initialState = {
     user: user ? user : false,
     audio: true,
-    pistas: false,
+    resultados: false,
     game: true
 }
 const reducer = (state, action) => {
@@ -21,13 +21,17 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 audio: action.audio,
-                pistas: false
+                resulados: false
             }
-        case 'PISTAS':
+        case 'RESULTADOS_OPEN':
             return {
                 ...state,
-                pistas: action.pistas,
-                audio: false
+                resultados: true
+            }
+        case 'RESULTADOS_CLOSE':
+            return {
+                ...state,
+                resultados: false
             }
         case 'GAME':
             return {
