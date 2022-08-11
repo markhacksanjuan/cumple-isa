@@ -16,7 +16,7 @@ import { TextField,
 const Login = () => {
     const { user } = useContext(UserStateContext)
     const dispatch = useContext(UserDispatchContext)
-    const realName = 'isabel'
+    const realName = ['isabel', 'sandra', 'maricari', 'mark']
     const [nameInput, setNameInput] = useState()
     const [error, setError] = useState()
     const { control, handleSubmit, getValues, setValue } = useForm({
@@ -43,7 +43,7 @@ const Login = () => {
     const renderButtonName = () => {
         const onClick = () => {
             const name = getValues('name')
-            if(name === realName) {
+            if(realName.includes(name.toLowerCase())) {
                 setNameInput(name)
             } else {
                 setError('Ups, no es correcto')
@@ -82,7 +82,7 @@ const Login = () => {
         )
     }
     const renderNameInput = () => {
-        if(getValues('name') !== realName){
+        if(!realName.includes(getValues('name').toLowerCase())){
             return (
                 <>
                     <Typography variant='h6' gutterBottom align='center'>

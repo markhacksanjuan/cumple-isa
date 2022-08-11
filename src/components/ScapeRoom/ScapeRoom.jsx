@@ -19,7 +19,7 @@ import Resultados from './Resultados/Resultados'
 import Pruebas from './Pruebas/Pruebas'
 
 const ScapeRoom = () => {
-    const { user, audio, userFetched } = useContext(UserStateContext)
+    const { user, audio } = useContext(UserStateContext)
     const dispatch = useContext(UserDispatchContext)
     const [show1, setShow1] = useState(user ? user.prueba1.show : false)
     const [show2, setShow2] = useState(user ? user.prueba2.show : false)
@@ -27,6 +27,7 @@ const ScapeRoom = () => {
     const [show4, setShow4] = useState(user ? user.prueba4.show : false)
     const [show5, setShow5] = useState(user ? user.prueba5.show : false)
     const [show6, setShow6] = useState(user ? user.prueba6.show : false)
+    const [userFetched, setUserFetched] = useState()
 
     const fetchUser = async () => {
         const response = await userService.fetchUser(user._id)
@@ -35,6 +36,7 @@ const ScapeRoom = () => {
             userFetched: response.user,
             user: response.user
         })
+        setUserFetched(response.user)
     }
 
     useEffect(() => {

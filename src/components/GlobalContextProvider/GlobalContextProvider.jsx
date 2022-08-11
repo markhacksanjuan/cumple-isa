@@ -21,7 +21,8 @@ const reducer = (state, action) => {
         case 'FETCH_USER':
             return {
                 ...state,
-                userFetched: action.userFetched
+                userFetched: action.userFetched,
+                user: action.user
             }
         case 'AUDIO':
             return {
