@@ -3,4 +3,4 @@ const url = {
     prod: 'https://cumple-is-back.herokuapp.com'
 }
 
-export default url.dev
+export default url.prod
