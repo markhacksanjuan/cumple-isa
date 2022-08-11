@@ -8,7 +8,8 @@ const initialState = {
     user: user ? user : false,
     audio: true,
     resultados: false,
-    game: true
+    game: true,
+    userFetched: false
 }
 const reducer = (state, action) => {
     switch (action.type) {
@@ -16,6 +17,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.user
+            }
+        case 'FETCH_USER':
+            return {
+                ...state,
+                userFetched: action.userFetched
             }
         case 'AUDIO':
             return {

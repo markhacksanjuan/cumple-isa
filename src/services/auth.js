@@ -1,7 +1,8 @@
 import axios from 'axios'
+import config from '../config'
 
 const http = axios.create({
-    baseURL: 'https://cumple-is-back.herokuapp.com/auth'
+    baseURL: `${config}/auth`
 })
 
 const login = async user => {

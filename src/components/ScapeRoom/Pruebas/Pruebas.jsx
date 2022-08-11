@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 
 import {
@@ -9,7 +9,11 @@ import {
     Button
 } from '@mui/material'
 
+import { pruebasService } from '../../../services/pruebas'
+import { UserStateContext } from '../../GlobalContextProvider/GlobalContextProvider'
+
 const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff }) => {
+    const { user } = useContext(UserStateContext)
     const { control, handleSubmit, setValue } = useForm({
         defaultValues: {
             [`prueba${prueba}`]: ''
@@ -22,6 +26,7 @@ const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff }) => {
         setError()
         if(data[`prueba${prueba}`] === respuesta){
             console.log(data)
+            await pruebasService.pruebas(user._id, prueba)
             setRespuestaCorrecta(true)
         }else {
             setError('Respuesta equivocada')
