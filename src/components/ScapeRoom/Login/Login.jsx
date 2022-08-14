@@ -33,6 +33,9 @@ const Login = () => {
         if(data.name && data.password){
             const response = await authService.login(data)
             console.log(response)
+            if(response.error){
+                setError(response.message)
+            }
             dispatch({
                 type: 'LOGIN',
                 user: response.user,
