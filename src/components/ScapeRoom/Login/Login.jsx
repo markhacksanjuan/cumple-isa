@@ -4,7 +4,8 @@ import { TextField,
     Button,
     Grid,
     Container,
-    Typography
+    Typography,
+    CircularProgress
  } from '@mui/material'
  import './login.style.css'
 
@@ -25,12 +26,14 @@ const Login = () => {
             password: ''
         }
     })
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
     }, [])
 
     const onSubmit = async data => {
         if(data.name && data.password){
+            setLoading(true)
             const response = await authService.login(data)
             console.log(response)
             if(response.error){
@@ -41,6 +44,7 @@ const Login = () => {
                 user: response.user,
                 audio: true
             })
+            setLoading(false)
         }
     }
     const renderButtonName = () => {
@@ -63,9 +67,10 @@ const Login = () => {
     const renderButtonStart = () => {
         return (
             <>
-                <Button fullWidth variant='contained' type='submit'>
+                {!loading ? <Button fullWidth variant='contained' type='submit'>
                     ¡EMPEZAR A JUGAR!
-                </Button>
+                </Button> : 
+                <CircularProgress />}
             </>
         )
     }
