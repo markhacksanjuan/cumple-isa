@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ScapeRoom from '../ScapeRoom/ScapeRoom'
 
 import Counter from '../Counter/Counter'
 
+import { UserStateContext } from '../GlobalContextProvider/GlobalContextProvider'
+
 const Home = () => {
+    const { user } = useContext(UserStateContext)
     const dateBirthday = '2022-08-23T00:00:00'
     const now = Date.now()
     const timeToScapeRoom = 9 * 60 * 60 * 1000
@@ -31,8 +34,8 @@ const Home = () => {
         <>
             {/* <Counter date='2022-08-23' /> */}
             {/* {formatedNow !== dateBirthday ? renderShow() : <ScapeRoom />} */}
-            {now < birthdayDelayed && renderShow()}
-            {now > birthdayDelayed && <ScapeRoom />}
+            {(now < birthdayDelayed && !user) && renderShow()}
+            {user && <ScapeRoom />}
         </>
     )
 }
