@@ -9,7 +9,8 @@ const initialState = {
     audio: true,
     resultados: false,
     game: true,
-    userFetched: false
+    userFetched: false,
+    pistas: false
 }
 const reducer = (state, action) => {
     switch (action.type) {
@@ -43,8 +44,18 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 game: action.game,
-                pistas: false,
+                resultados: false,
                 audio: false
+            }
+        case 'PISTAS_OPEN': 
+            return {
+                ...state,
+                pistas: true
+            }
+        case 'PISTAS_CLOSE':
+            return {
+                ...state,
+                pistas: false
             }
         default:
             return state

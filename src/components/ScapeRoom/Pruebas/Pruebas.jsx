@@ -27,7 +27,7 @@ const Pruebas = ({ prueba, respuesta, resultado, setShow, setOff, show }) => {
 
     const onSubmit = async data => {
         setError()
-        if(data[`prueba${prueba}`] === respuesta){
+        if(data[`prueba${prueba}`] === respuesta.toLowerCase()){
             console.log(data)
             await pruebasService.pruebas(user._id, prueba)
             setRespuestaCorrecta(true)

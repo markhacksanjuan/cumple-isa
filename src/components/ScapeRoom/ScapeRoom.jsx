@@ -99,12 +99,12 @@ const ScapeRoom = () => {
                 <Resultados/>
                 <Grid container direction='column' justifyContent='center' alignItems='center'>
                     {user ? renderGame() : renderBegin()}
-                    {(show1 && !audio) && <Pruebas prueba={1} respuesta='daleisa' resultado='1234' setShow={setShow2} setOff={setShow1} show={user?.prueba1.show}/>}
-                    {(show2 && !audio) && <Pruebas prueba={2} respuesta='izquierda' resultado='5678' setShow={setShow3} setOff={setShow2} show={user?.prueba2.show} />}
-                    {(show3 && !audio) && <Pruebas prueba={3} respuesta='salchipapa' resultado='39.26778, -2.61427' setShow={setShow4} setOff={setShow3} show={user?.prueba3.show} />}
-                    {(show4 && !audio) && <Pruebas prueba={4} respuesta='culo' resultado='2468' setShow={setShow5} setOff={setShow4} show={user?.prueba4.show} />}
-                    {(show5 && !audio) && <Pruebas prueba={5} respuesta='culo' resultado='rugby, Coslada, negra, Holanda' setShow={setShow6} setOff={setShow5} show={user?.prueba5.show} />}
-                    {(show6 && !audio) && <Pruebas prueba={6} respuesta='culo' resultado='39.15468, -2.69563' show={user?.prueba6.show}/>}
+                    {(show1 && !audio) && <Pruebas prueba={1} respuesta='daleisa' resultado='371' setShow={setShow2} setOff={setShow1} show={user?.prueba1.show}/>}
+                    {(show2 && !audio) && <Pruebas prueba={2} respuesta='izquierda' resultado='925' setShow={setShow3} setOff={setShow2} show={user?.prueba2.show} />}
+                    {(show3 && !audio) && <Pruebas prueba={3} respuesta='salchipapa' resultado='39.273914, -2.609611' setShow={setShow4} setOff={setShow3} show={user?.prueba3.show} />}
+                    {(show4 && !audio) && <Pruebas prueba={4} respuesta='culo' resultado='472' setShow={setShow5} setOff={setShow4} show={user?.prueba4.show} />}
+                    {(show5 && !audio) && <Pruebas prueba={5} respuesta='la calle' resultado='rugby, Coslada, negra, Holanda' setShow={setShow6} setOff={setShow5} show={user?.prueba5.show} />}
+                    {(show6 && !audio) && <Pruebas prueba={6} respuesta='jason momoa' resultado='39.2668365, -2.6009443 -> XXVIII-VIII 19:00' show={user?.prueba6.show}/>}
                 </Grid>
             </Layout>
         </>

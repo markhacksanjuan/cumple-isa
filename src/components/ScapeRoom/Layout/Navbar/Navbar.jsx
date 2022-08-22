@@ -23,9 +23,14 @@ const Navbar = () => {
             audio: true
         })
     }
-    const onClickPistas = () => {
+    const onClickResultados = () => {
         dispatch({
             type: 'RESULTADOS_OPEN'
+        })
+    }
+    const onClickPistas = () => {
+        dispatch({
+            type: 'PISTAS_OPEN'
         })
     }
 
@@ -36,15 +41,15 @@ const Navbar = () => {
                     <Toolbar>
                         <Grid container alignContent='center' justifyContent='space-between' wrap='nowrap'>
                             <Grid item>
-                                <Typography variant='h6'>
+                                <Button color='inherit' onClick={() => onClickPistas()}>
                                     Necesitas ayuda?
-                                </Typography>
+                                </Button>
                             </Grid>
                             <Grid item container justifyContent='end' alignContent='center'>
                                 <Button color='inherit' onClick={() => onClickAudio()}>
                                     audio
                                 </Button>
-                                <Button color='inherit' onClick={() => onClickPistas()}>
+                                <Button color='inherit' onClick={() => onClickResultados()}>
                                     resultados
                                 </Button>
                             </Grid>
