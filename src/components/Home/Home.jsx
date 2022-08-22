@@ -4,7 +4,7 @@ import ScapeRoom from '../ScapeRoom/ScapeRoom'
 import Counter from '../Counter/Counter'
 
 const Home = () => {
-    const dateBirthday = '2022-08-23'
+    const dateBirthday = '2022-08-23T00:00:00'
     const now = Date.now()
     const timeToScapeRoom = 9 * 60 * 60 * 1000
     const birthday= new Date(dateBirthday).valueOf()
